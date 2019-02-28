@@ -12,7 +12,7 @@ from timeit import default_timer as timer
 import numpy as np
 import random
 import pandas as pd
-
+import cv2
 
 
 
@@ -26,7 +26,7 @@ from torch.utils.data import DataLoader
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
-from torch.autograd import optim
+from torch.autograd import Variable
 import torch.backends.cudnn as cudnn
 
 
