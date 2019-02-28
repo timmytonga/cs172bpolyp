@@ -5,7 +5,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torchvision import models
-from torchsummary import summary
+#from torchsummary import summary
 
 
 ## Helper Functions and Classes
