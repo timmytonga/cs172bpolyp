@@ -17,7 +17,6 @@ batch_size = 32
 epoch_save = []
 
 
-
 ## Model Loading
 model = Unet((3,H,W))
 net = model.cuda()
@@ -127,7 +126,16 @@ for i in range(epochs):
 
                 valid_loss = loss.data[0]
 
-        
+        ## Saving Model
+        if epoch in epoch_save:
+            save_name = '%03d.pth'%epoch
+            torch.save(net.state_dict(), os.path.join(out_dir,'snap', save_name))
+            torch.save({
+                'state_dict':net.state_dict(),
+                'optimizer': optimizer.state_dict(),
+                'epoch': epoch,
+                }, os.path.join(out_dir, 'checkpoint', save_name))
+
 ## Saving Model
 
 print("Finished Training")
