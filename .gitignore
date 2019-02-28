@@ -5,5 +5,8 @@
 *.tif
 
 # Ignore Pycache
-# __pycache__/
+__pycache__/
 *.pyc
+
+# Ignore .ipynb_checkpoints
+.ipynb_checkpoints/
