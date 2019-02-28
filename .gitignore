@@ -10,3 +10,12 @@ __pycache__/
 
 # Ignore .ipynb_checkpoints
 .ipynb_checkpoints/
+
+# Ignore Results folder
+results/
+
+# Ignore test_train.py
+test_train.py
+
+# Ignore tools.tools
+tools.tools
