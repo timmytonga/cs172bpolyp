@@ -1,6 +1,6 @@
 from tools import *
 
-def validate(model, validloader, criterion, epoch, log):
+def validate(net, validloader, criterion, epoch, log, lr):
 
     ## Enter Evalution Mode
     net.eval()
@@ -14,15 +14,15 @@ def validate(model, validloader, criterion, epoch, log):
             inputs = Variable(inputs.cuda())
             labels = Variable(labels.cuda())
 
-            pred = model(inputs)
+            pred = net(inputs)
             loss = criterion(pred, labels)
 
             temp_valid_loss = loss.item()
             epoch_valid.append(temp_valid_loss)
             
             ## Write Validation Loss
-            log.write('\tValidation: %5.1f      %0.4f  | %0.4f  ... \n' % \
-                        (epoch +(it/num_it), lr, temp_valid_loss))
+            log.write('\tValidation: %5.1f   |   loss: %0.4f  ... \n' % \
+                        (epoch +(it/num_it),  temp_valid_loss))
 
 
         epoch_valid = np.array(epoch_valid)
