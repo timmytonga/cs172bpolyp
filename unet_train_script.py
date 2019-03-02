@@ -99,7 +99,7 @@ for epoch in range(epochs):
     start = timer() 
    
     ## Training Pass
-    temp_train_loss = train_net(net, optimizer, trainloader, criterion, epoch, log, lr)
+    temp_train_loss = train_net(net, optimizer, trainloader, criterion, epoch, log)
     train_loss.append(temp_train_loss)
 
     ## Validation Pass
