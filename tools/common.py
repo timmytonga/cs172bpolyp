@@ -20,7 +20,7 @@ import cv2
 # Pytorch Imports
 import torch
 import torchvision
-from torchvision import transforms
+from torchvision import transforms, models
 from torch.utils.data.dataset import Dataset
 from torch.utils.data import DataLoader
 
