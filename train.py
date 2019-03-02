@@ -1,5 +1,5 @@
 from tools import *
-def train_net(net, optimizer, trainloader,criterion, epoch, log, lr):
+def train(net, optimizer, trainloader,criterion, epoch, log):
     """
     Function for Training Pass of Neural Network on dataset
     """
@@ -35,7 +35,7 @@ def train_net(net, optimizer, trainloader,criterion, epoch, log, lr):
         
         ## Write to Log
         log.write('\tTraining: %5.1f   |   loss:%0.4f  ... \n' % \
-                        (epoch +(it/num_it), lr, temp_train_loss))
+                        (epoch +(it/num_it),  temp_train_loss))
 
 
 

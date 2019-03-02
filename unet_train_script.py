@@ -5,7 +5,7 @@ from tools import *
 
 from Unet import Unet #Model Import
 from dataload import PolypLoader
-from train_net import train_net
+from train import train
 from validate import validate
 H = 224
 W = 224
@@ -99,7 +99,7 @@ for epoch in range(epochs):
     start = timer() 
    
     ## Training Pass
-    temp_train_loss = train_net(net, optimizer, trainloader, criterion, epoch, log)
+    temp_train_loss = train(net, optimizer, trainloader, criterion, epoch, log)
     train_loss.append(temp_train_loss)
 
     ## Validation Pass
