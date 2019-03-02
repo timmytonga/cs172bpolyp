@@ -7,7 +7,7 @@ import torchvision
 from torch.utils.data.dataset import Dataset
 from torchvision import transforms
 import cv2
-
+from PIL import Image
 
 
 class PolypLoader(Dataset):
@@ -17,7 +17,7 @@ class PolypLoader(Dataset):
     
     """
     
-    def __init__(self, path ,transforms = None):
+    def __init__(self, path ,transform = None):
         """
         """
         self.path = path
@@ -40,10 +40,10 @@ class PolypLoader(Dataset):
         self.num = len(self.file_names)
         
         ## Preloading Images
-        if transforms is not None:
-            self.transforms = transforms.Compose(transforms)
+        if transform is not None:
+            self.transform = transforms.Compose(transform)
         else:
-            self.transforms = None
+            self.transform = None
                
         
         
@@ -54,13 +54,18 @@ class PolypLoader(Dataset):
         #assert(index < self.num)
         #assert(index >= 0)
         
-        ## Loading Images
-        target = cv2.imread(self.train_files[index])
+        ## Loading Images with cv2
+        target = cv2.cvtColor(cv2.imread(self.train_files[index]), cv2.COLOR_BGR2RGB)
         label = cv2.imread(self.label_files[index])
+
+        ## Convert Images to PIL Format
+        target = Image.fromarray(target)
+        label = Image.fromarray(label[:,:,0])
+        #label = label[:,:,0] ## Note Label is 3 channel tiff with all channels same
         
         
-        if self.transforms is not None:
-            target = self.transforms(target)
+        if self.transform is not None:
+            target = self.transform(target)
             label = self.transform(label)
             
         return target, label
