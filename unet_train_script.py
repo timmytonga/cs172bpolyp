@@ -3,7 +3,7 @@
 ## Import Statements
 from tools import *
 
-from Unet import Unet #Model Import
+from models.Unet import Unet #Model Import
 from dataload import PolypLoader
 from train import train
 from validate import validate
