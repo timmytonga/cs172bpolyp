@@ -1,8 +1,6 @@
 
 
 
-# Ignore .tif Files
-*.tif
 
 # Ignore Pycache
 __pycache__/
