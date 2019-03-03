@@ -12,16 +12,27 @@ W = 224
 D = 3
 
 ## Local  Variables
-epochs = 5
+epochs = 10
 batch_size = 2
 lr = 0.01
 
 epoch_save = list(range(epochs)[::5])
-transform = [transforms.Resize((H,W)), transforms.ToTensor()]
+train_transform = [transforms.Resize((H,W)),
+        transforms.RandomAffine(degrees = (-45,45), translate = (0.3,0.3), scale = (0.5,2)),
+        transforms.RandomHorizontalFlip(), 
+        transforms.ToTensor(), 
+        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])]
+
+valid_transform = [transforms.Resize((H,W)),
+        transforms.ToTensor(), 
+        transforms.RandomHorizontalFlip(), 
+        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])]
+
+
 
 ## Model Loading
 model = Unet((3,H,W))
-net = model.cuda()
+net = model
 optimizer = optim.SGD(net.parameters(), lr=lr, momentum=0.9, weight_decay=0.0005)
 criterion = nn.BCEWithLogitsLoss().cuda()
 
@@ -64,13 +75,13 @@ valid_path = os.path.join(data_path, 'validation')
 test_path = os.path.join(data_path, 'training')
 
 
-train_data = PolypLoader(train_path, transform = transform)
+train_data = PolypLoader(train_path, transform = train_transform)
 trainloader = DataLoader(train_data, batch_size = batch_size, shuffle=True)
 
-valid_data = PolypLoader(valid_path, transform = transform)
+valid_data = PolypLoader(valid_path, transform = valid_transform)
 validloader = DataLoader(valid_data, batch_size = batch_size, shuffle=True)
 
-test_data = PolypLoader(test_path, transform = transform)
+test_data = PolypLoader(test_path, transform = None)
 testloader= DataLoader(test_data, batch_size = batch_size, shuffle=True)
 
 print("Load Data Complete")

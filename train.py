@@ -21,6 +21,8 @@ def train(net, optimizer, trainloader,criterion, epoch, log):
 
         outputs = net(inputs)
         #print("Print Output Shape ", outputs.shape)
+
+
         #print("Label Shape ", labels.shape)
         loss = criterion(outputs, labels)
        
